@@ -72,14 +72,19 @@ def R(name):
 
 def save(fig, name):
     p = os.path.join(OUT, name)
-    fig.savefig(p, dpi=600, bbox_inches='tight', pad_inches=0.08, metadata={'Software': ''})
+    w_in, h_in = fig.get_size_inches()
+    # ScholarOne PDF converter rejects images > 40 MP (height * width >= 40,000,000);
+    # keep 600 DPI when <= 32 MP, else 450 DPI (well above JMS 300-DPI print requirement).
+    target_dpi = 450 if (w_in * h_in * 600 * 600) > 32_000_000 else 600
+    fig.savefig(p, dpi=target_dpi, bbox_inches='tight', pad_inches=0.08, metadata={'Software': ''})
     plt.close(fig)
-    # Strip all PNG text metadata chunks while preserving exact 600 DPI
+    # Strip all PNG text metadata chunks while preserving exact target DPI
     with Image.open(p) as im:
         clean_im = Image.new(im.mode, im.size)
         clean_im.putdata(list(im.getdata()))
-        clean_im.save(p, format='PNG', dpi=(600, 600), optimize=False)
-    print('Saved (clean 600-DPI PNG):', p)
+        clean_im.save(p, format='PNG', dpi=(target_dpi, target_dpi), optimize=False)
+        mp = (im.size[0] * im.size[1]) / 1e6
+    print(f'Saved (clean {target_dpi}-DPI PNG, {im.size[0]}x{im.size[1]} = {mp:.1f} MP): {p}')
 
 
 def clean_ax(ax, grid='y'):
