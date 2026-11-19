@@ -1,0 +1,7 @@
+Cap_ID,Center_Lon,Center_Lat,Subgrid_Cells_In_Basin,Total_Cells_In_Domain,Interior_Area_Weight,Exterior_Fraction_In_144Grid
+Cap_1,96.56,34.29,4,15,0.0301,0.733
+Cap_2,99.36,33.87,24,40,0.3736,0.4
+Cap_3,101.02,35.23,8,28,0.0967,0.714
+Cap_4,98.62,35.3,17,28,0.2266,0.393
+Cap_5,102.33,33.33,19,25,0.239,0.24
+Cap_6,96.18,35.17,4,8,0.0341,0.5

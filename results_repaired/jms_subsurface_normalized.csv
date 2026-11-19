@@ -1,0 +1,10 @@
+Model_Layer,Thickness_cm,Slope_mma_05_09,Per_cm_mma_cm,Share_pct,t,df,p_HAC
+GLDAS-2.2 GWS (Assimilated EnKS),,-4.603,,73.2,-2.83,75,0.00471
+GLDAS-2.2 RZSM (Assimilated EnKS),,-1.42,,22.6,-3.11,75,0.00188
+GLDAS-2.2 SWE (Assimilated EnKS),,-0.263,,4.2,-2.26,75,0.02388
+GLDAS-2.1 SM 0–10 cm (Open-loop),10.0,-0.634,-0.0634,6.8,-6.41,75,0.0
+GLDAS-2.1 SM 10–40 cm (Open-loop),30.0,-1.077,-0.0359,11.5,-4.53,75,1e-05
+GLDAS-2.1 SM 40–100 cm (Open-loop),60.0,-4.283,-0.0714,45.8,-6.59,75,0.0
+GLDAS-2.1 SM 100–200 cm (Open-loop),100.0,-3.361,-0.0336,35.9,-5.05,75,0.0
+GLDAS-2.1 SM Total 0–200 cm,200.0,-9.355,-0.0468,100.0,-7.0,75,0.0
+GLDAS-2.1 Qsb Baseflow (mm a⁻²),,-24.198,,,-2.84,75,0.00448

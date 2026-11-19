@@ -1,0 +1,9 @@
+Metric,Point_Estimate,MC_SD,CI95_lo,CI95_hi,Note
+w_WB_Peak_2018_2020,1.282,0.216,0.939,1.77,"Joint MC propagation of sigma_P, sigma_dS=18mm, sigma_R=5%"
+w_WB_Drawdown_2021_2024,1.285,0.077,1.142,1.445,Joint MC propagation
+Delta_w_WB_Drawdown_minus_Peak,0.003,0.229,-0.517,0.4,Invariance test across periods
+w_WB_Peak_2018_2019_excl_2020,1.15,,,,Sensitivity excluding extreme wet 2020
+Mean_E_wb_using_P_TC_2016_2024_mm,411.1,,,,"w_WB_TC Peak=1.054, Drawdown=1.338"
+Waterfall_Climate_Aridity_Effect,-0.0729,0.0281,-0.1299,-0.0175,2018-2020 to 2021-2024 R/P decomposition
+Waterfall_Storage_Release_Effect,0.0053,0.007,-0.0071,0.0208,2018-2020 to 2021-2024 R/P decomposition
+Waterfall_Landscape_wWB_Residual_Effect,-0.0013,0.0634,-0.1383,0.115,2018-2020 to 2021-2024 R/P decomposition

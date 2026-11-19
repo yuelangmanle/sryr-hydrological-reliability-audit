@@ -1,0 +1,14 @@
+FeatureSet,Model,N_test,RMSE_cm,MAE_cm,OOS_R2,r
+Exogenous-Only (0–6 mo),Ridge,90,2.093,1.707,-0.032,0.413
+Exogenous-Only (0–6 mo),Lasso,90,2.083,1.698,-0.023,0.435
+Exogenous-Only (0–6 mo),RandomForest,90,2.038,1.71,0.021,0.393
+Exogenous-Only (0–6 mo),XGBoost,90,2.059,1.691,0.001,0.359
+Exogenous-Long (0–24 mo),Ridge,90,1.571,1.217,0.418,0.83
+Exogenous-Long (0–24 mo),Lasso,90,1.636,1.257,0.369,0.82
+Exogenous-Long (0–24 mo),RandomForest,90,1.56,1.297,0.426,0.674
+Exogenous-Long (0–24 mo),XGBoost,90,1.53,1.242,0.449,0.681
+Exogenous-Long + AR(1),Ridge,90,0.832,0.662,0.837,0.929
+Exogenous-Long + AR(1),Lasso,90,0.658,0.54,0.898,0.948
+Exogenous-Long + AR(1),RandomForest,90,1.042,0.83,0.744,0.875
+Exogenous-Long + AR(1),XGBoost,90,1.131,0.89,0.699,0.848
+Persistence Baseline,Persistence (t − 1),90,0.625,0.499,0.908,0.953

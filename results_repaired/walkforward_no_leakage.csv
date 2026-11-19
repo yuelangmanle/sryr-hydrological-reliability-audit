@@ -1,0 +1,10 @@
+FeatureSet,Model,N_test,RMSE_cm,MAE_cm,R2,r
+Exogenous_Only (No GWS/AR Leakage),Ridge,101,2.145,1.77,-0.006,0.441
+Exogenous_Only (No GWS/AR Leakage),Lasso,101,2.12,1.736,0.017,0.461
+Exogenous_Only (No GWS/AR Leakage),RandomForest,101,2.004,1.677,0.123,0.472
+Exogenous_Only (No GWS/AR Leakage),XGBoost,101,2.126,1.735,0.012,0.401
+Exogenous + AR1,Ridge,90,0.688,0.572,0.879,0.939
+Exogenous + AR1,Lasso,90,0.615,0.501,0.903,0.952
+Exogenous + AR1,RandomForest,90,0.958,0.749,0.766,0.886
+Exogenous + AR1,XGBoost,90,1.133,0.883,0.672,0.835
+Baseline,Persistence (lwe_lag1),90,0.585,0.466,0.913,0.956

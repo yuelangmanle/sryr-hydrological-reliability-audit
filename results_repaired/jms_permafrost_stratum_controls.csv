@@ -1,0 +1,35 @@
+Analysis,Elevation_Stratum,Thermal_Class,Model,n_unit,Mean_Elev_m,Base_NDVI_04_08,NDVI_trend_dec,Rel_change_pct,HAC_p,Explained_dec,R2,Unexpl_pct,Unexpl_CI95_lo,Unexpl_CI95_hi
+2km_GEE_Combo_Trend,<3800m,Permafrost (ST4<0C),NDVI_GS_NoSnow HAC,111.4,,0.497,0.0126,5.09,0.02047,,,,,
+2km_GEE_Combo_Trend,<3800m,Seasonally Frozen (ST4>=0C),NDVI_GS_NoSnow HAC,34773.0,,0.62,0.0107,3.1,0.00034,,,,,
+2km_GEE_Combo_Trend,3800-4300m,Permafrost (ST4<0C),NDVI_GS_NoSnow HAC,12932.4,,0.423,0.0186,8.69,2e-05,,,,,
+2km_GEE_Combo_Trend,3800-4300m,Seasonally Frozen (ST4>=0C),NDVI_GS_NoSnow HAC,24858.4,,0.565,0.0109,3.88,0.00026,,,,,
+2km_GEE_Combo_Trend,>=4300m,Permafrost (ST4<0C),NDVI_GS_NoSnow HAC,44321.9,,0.36,0.0194,10.92,0.0001,,,,,
+2km_GEE_Combo_Trend,>=4300m,Seasonally Frozen (ST4>=0C),NDVI_GS_NoSnow HAC,7998.4,,0.468,0.018,7.31,0.0001,,,,,
+Pixel_Elevation_Stratum,3800-4300m,Permafrost (ST4<0C),OLS T+P,597.0,4185.3,0.419,0.0192,,,0.0088,0.58,54.2,36.1,78.4
+Pixel_Elevation_Stratum,3800-4300m,Permafrost (ST4<0C),OLS T+P+SM+SC,597.0,4185.3,0.419,0.0192,,,0.0086,0.68,55.0,35.2,78.0
+Pixel_Elevation_Stratum,3800-4300m,Seasonally Frozen (ST4>=0C),OLS T+P,1203.0,4032.5,0.577,0.0108,,,0.0082,0.379,24.2,-66.5,77.9
+Pixel_Elevation_Stratum,3800-4300m,Seasonally Frozen (ST4>=0C),OLS T+P+SM+SC,1203.0,4032.5,0.577,0.0108,,,0.0046,0.727,57.8,-16.6,93.3
+Pixel_Elevation_Stratum,>=4300m,Permafrost (ST4<0C),OLS T+P,2209.0,4525.6,0.359,0.0201,,,0.0095,0.626,52.6,38.5,71.1
+Pixel_Elevation_Stratum,>=4300m,Permafrost (ST4<0C),OLS T+P+SM+SC,2209.0,4525.6,0.359,0.0201,,,0.0082,0.67,59.1,43.4,79.9
+Pixel_Elevation_Stratum,>=4300m,Seasonally Frozen (ST4>=0C),OLS T+P,402.0,4398.9,0.472,0.0184,,,0.0111,0.526,39.3,1.3,66.3
+Pixel_Elevation_Stratum,>=4300m,Seasonally Frozen (ST4>=0C),OLS T+P+SM+SC,402.0,4398.9,0.472,0.0184,,,0.0083,0.661,55.0,16.9,79.2
+Pixel_Elev_BaseNDVI_Matched,3800-4300m & NDVI0 0.35-0.55,Permafrost (ST4<0C),OLS T+P,193.0,4178.1,0.451,0.0175,,,0.0101,0.578,42.4,22.4,70.9
+Pixel_Elev_BaseNDVI_Matched,3800-4300m & NDVI0 0.35-0.55,Permafrost (ST4<0C),OLS T+P+SM+SC,193.0,4178.1,0.451,0.0175,,,0.0096,0.722,45.1,15.8,76.4
+Pixel_Elev_BaseNDVI_Matched,3800-4300m & NDVI0 0.35-0.55,Seasonally Frozen (ST4>=0C),OLS T+P,234.0,4113.5,0.505,0.0151,,,0.0094,0.487,38.1,-1.7,71.2
+Pixel_Elev_BaseNDVI_Matched,3800-4300m & NDVI0 0.35-0.55,Seasonally Frozen (ST4>=0C),OLS T+P+SM+SC,234.0,4113.5,0.505,0.0151,,,0.0068,0.799,54.9,17.3,75.9
+Pixel_Basin_All,All elevations,Permafrost (ST4<0C),OLS T+P,2809.0,4452.5,0.372,0.0199,,,0.0095,0.625,52.4,38.6,71.6
+Pixel_Basin_All,All elevations,Permafrost (ST4<0C),OLS T+P+SM+SC,2809.0,4452.5,0.372,0.0199,,,0.0084,0.674,57.9,44.0,79.7
+Pixel_Basin_All,All elevations,Permafrost (ST4<0C),Ridge(alpha=1) T+P+SM+SC,2809.0,4452.5,0.372,0.0199,,,0.008,0.673,60.0,47.9,79.7
+Pixel_Basin_All,All elevations,Seasonally Frozen (ST4>=0C),OLS T+P,3300.0,3830.7,0.583,0.0117,,,0.0091,0.43,22.7,-59.1,78.8
+Pixel_Basin_All,All elevations,Seasonally Frozen (ST4>=0C),OLS T+P+SM+SC,3300.0,3830.7,0.583,0.0117,,,0.0045,0.743,61.6,-6.9,103.3
+Pixel_Basin_All,All elevations,Seasonally Frozen (ST4>=0C),Ridge(alpha=1) T+P+SM+SC,3300.0,3830.7,0.583,0.0117,,,0.0046,0.74,60.6,-6.6,99.3
+ST4_Threshold_-0.5C,40.3% basin,ST4 < -0.5C,OLS T+P,2463.0,4470.2,0.355,0.0207,,,0.0094,0.628,54.5,41.4,73.1
+ST4_Threshold_-0.5C,59.7% basin,ST4 >= -0.5C,OLS T+P,3646.0,3877.7,0.574,0.012,,,0.0093,0.452,21.9,-54.5,72.8
+ST4_Threshold_+0.0C,46.0% basin,ST4 < +0.0C,OLS T+P,2809.0,4452.5,0.372,0.0199,,,0.0095,0.625,52.4,38.7,72.0
+ST4_Threshold_+0.0C,54.0% basin,ST4 >= +0.0C,OLS T+P,3300.0,3830.7,0.583,0.0117,,,0.0091,0.43,22.7,-55.9,77.4
+ST4_Threshold_+0.5C,51.7% basin,ST4 < +0.5C,OLS T+P,3159.0,4432.3,0.385,0.0194,,,0.0096,0.624,50.5,34.9,70.5
+ST4_Threshold_+0.5C,48.3% basin,ST4 >= +0.5C,OLS T+P,2950.0,3778.5,0.594,0.0112,,,0.0087,0.404,22.6,-69.2,82.5
+CrossSensor_TC_MODIS,All elevations,Permafrost (ST4<0C),CrossSensor TC_T + GPM_P,2809.0,4452.5,0.372,0.0199,,,0.0058,0.527,70.8,50.3,79.5
+CrossSensor_TC_MODIS,All elevations,Permafrost (ST4<0C),CrossSensor TC_T + P + SM + MODIS_SC,2809.0,4452.5,0.372,0.0199,,,0.0054,0.607,72.8,49.2,86.9
+CrossSensor_TC_MODIS,All elevations,Seasonally Frozen (ST4>=0C),CrossSensor TC_T + GPM_P,3300.0,3830.7,0.583,0.0117,,,0.0062,0.37,46.8,4.5,76.9
+CrossSensor_TC_MODIS,All elevations,Seasonally Frozen (ST4>=0C),CrossSensor TC_T + P + SM + MODIS_SC,3300.0,3830.7,0.583,0.0117,,,0.0041,0.775,64.9,-30.4,83.8
