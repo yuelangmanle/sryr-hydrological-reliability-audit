@@ -51,8 +51,9 @@ LGREY = '#E2E8F0'
 MGREY = '#A0AEC0'
 
 plt.rcParams.update({
-    'font.family': 'sans-serif',
-    'font.sans-serif': ['DejaVu Sans', 'Helvetica', 'Arial'],
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman', 'DejaVu Serif', 'Times'],
+    'mathtext.fontset': 'stix',
     'axes.edgecolor': '#2D3748',
     'axes.linewidth': 0.85,
     'xtick.color': '#2D3748',
@@ -71,9 +72,14 @@ def R(name):
 
 def save(fig, name):
     p = os.path.join(OUT, name)
-    fig.savefig(p, dpi=600, bbox_inches='tight', pad_inches=0.08)
+    fig.savefig(p, dpi=600, bbox_inches='tight', pad_inches=0.08, metadata={'Software': ''})
     plt.close(fig)
-    print('Saved:', p)
+    # Strip all PNG text metadata chunks while preserving exact 600 DPI
+    with Image.open(p) as im:
+        clean_im = Image.new(im.mode, im.size)
+        clean_im.putdata(list(im.getdata()))
+        clean_im.save(p, format='PNG', dpi=(600, 600), optimize=False)
+    print('Saved (clean 600-DPI PNG):', p)
 
 
 def clean_ax(ax, grid='y'):
@@ -261,7 +267,7 @@ def fig1():
     axc.set_yticklabels([r[0] for r in rows], fontsize=8.2, fontweight='bold')
     axc.invert_yaxis()
     axc.set_xlim(-1.05, 1.05)
-    axc.set_xlabel('Weighted trend of 0.5° cells inside basin (cm a⁻¹)')
+    axc.set_xlabel('Weighted trend of 0.5° cells inside basin (cm a$^{-1}$)')
     axc.legend(loc='lower left', fontsize=7.3, **LEG)
     panel_title(axc, 'c', 'Dumbbell trend per native unit (right: weight & exterior %)', fs=9.6)
     fig.subplots_adjust(right=0.91)
@@ -295,8 +301,8 @@ def fig2():
                    color=NAVY, alpha=0.14, label='GRACE formal ±1σ')
     a.plot(df.dt[m], df.anom_lwe_basin[m], color=NAVY, lw=1.55, label='GRACE/GRACE-FO (n = 218)')
     for sub, col, lb in [
-        (m & (df.ym <= 201706), BLUE, f'Pre-gap {t3.Sub_Pre_HAC:+.3f} cm a⁻¹'),
-        (m & (df.ym >= 201805), CRIMSON, f'Post-gap {t3.Sub_Post_May18_HAC:+.3f} cm a⁻¹')
+        (m & (df.ym <= 201706), BLUE, f'Pre-gap {t3.Sub_Pre_HAC:+.3f} cm a$^{-1}$'),
+        (m & (df.ym >= 201805), CRIMSON, f'Post-gap {t3.Sub_Post_May18_HAC:+.3f} cm a$^{-1}$')
     ]:
         p = np.polyfit(df.loc[sub, 't_yr'], df.loc[sub, 'anom_lwe_basin'], 1)
         a.plot(df.dt[sub], np.polyval(p, df.loc[sub, 't_yr']), color=col, lw=2.3, label=lb, zorder=6)
@@ -355,7 +361,7 @@ def fig2():
     c.set_yticklabels(nms, fontsize=8.2, fontweight='bold')
     c.invert_yaxis()
     c.set_xlim(-2.6, 5.5)
-    c.set_xlabel('Trend (cm a⁻¹): OLS-HAC, WLS-HAC & 2,000 correlated-error draws')
+    c.set_xlabel('Trend (cm a$^{-1}$): OLS-HAC, WLS-HAC & 2,000 correlated-error draws')
     c.legend(loc='upper right', fontsize=7.0, **LEG)
     panel_title(c, 'c', 'Forest plot of window sensitivity (recent CI spans zero)')
 
@@ -383,7 +389,7 @@ def fig2():
     d.set_xticks([1, 2, 3, 4, 6, 9, 12, 14.6])
     d.set_xticklabels(['1', '2', '3', '4', '6', '9', '12', 'annual'])
     d.set_xlabel('Cumulative window k (months) for NDVI–TWSA partial correlation')
-    d.set_ylabel('−log₁₀ p')
+    d.set_ylabel(r'−$\log_{10}$ p')
     d.set_ylim(0, 2.35)
     d.legend(loc='upper left', fontsize=7.1, **LEG)
     panel_title(d, 'd', 'Autocorrelation collapses k = 12 NDVI–TWSA significance')
@@ -412,11 +418,11 @@ def fig3():
     for i, ((d0, d1), col) in enumerate(zip(depths, cols_s)):
         r = g21.iloc[i]
         a.barh((d0 + d1) / 2, r.Per_cm_mma_cm, height=(d1 - d0) * 0.92, color=col, edgecolor='#1A202C', lw=0.8, alpha=0.92)
-        txt = f'{d0}–{d1} cm: {r.Per_cm_mma_cm:.3f} mm a⁻¹ cm⁻¹  ({r.Share_pct:.1f}% of loss; {r.Thickness_cm/2:.0f}% of depth)'
+        txt = f'{d0}–{d1} cm: {r.Per_cm_mma_cm:.3f} mm a$^{-1}$ cm$^{-1}$  ({r.Share_pct:.1f}% of loss; {r.Thickness_cm/2:.0f}% of depth)'
         y_pos = (d0 + d1) / 2
         a.text(r.Per_cm_mma_cm - 0.0025, y_pos, txt, ha='right', va='center', fontsize=7.3, fontweight='bold')
     g22 = sub[sub.Model_Layer.str.contains('GLDAS-2.2 GWS')].iloc[0]
-    a.axvline(-0.0468, color=NAVY, ls='--', lw=1.2, label='Column-mean rate (−0.047 mm a⁻¹ cm⁻¹)')
+    a.axvline(-0.0468, color=NAVY, ls='--', lw=1.2, label='Column-mean rate (−0.047 mm a$^{-1}$ cm$^{-1}$)')
     a.text(0.02, 0.03,
            f'Bar height = physical thickness (200 cm); area = total loss.\n40–200 cm holds {g21.Share_pct[2:].sum():.1f}% of loss across 80% of depth.\nGLDAS-2.2 assigns {g22.Share_pct:.1f}% to GWS (GRACE-assimilated).',
            transform=a.transAxes, fontsize=7.3,
@@ -425,7 +431,7 @@ def fig3():
     a.set_yticks([0, 40, 100, 200])
     a.set_yticklabels(['0 cm', '40 cm', '100 cm', '200 cm'])
     a.set_xlim(-0.225, 0.008)
-    a.set_xlabel('Post-2018 loss rate per cm of soil (mm a⁻¹ cm⁻¹), GLDAS-2.1 open-loop')
+    a.set_xlabel('Post-2018 loss rate per cm of soil (mm a$^{-1}$ cm$^{-1}$), GLDAS-2.1 open-loop')
     a.legend(loc='lower right', bbox_to_anchor=(0.98, 0.03), fontsize=6.9, **LEG)
     panel_title(a, 'a', 'Soil-profile normalization: block area = total loss (no deep excess)')
 
@@ -453,7 +459,7 @@ def fig3():
     b.set_xticks(x)
     b.set_xticklabels(bl)
     b.set_ylim(-0.35, 1.98)
-    b.set_ylabel('Temperature trend 2004–2024 (°C decade⁻¹, ±95% HAC CI)')
+    b.set_ylabel('Temperature trend 2004–2024 (°C decade$^{-1}$, ±95% HAC CI)')
     b.legend(loc='upper right', fontsize=7.1, **LEG)
     panel_title(b, 'b', 'Elevation warming gradient is product-dependent')
 
@@ -709,9 +715,9 @@ def fig6():
                label=f'{nm} ET ({old[col].mean():.0f}, {100*(old[col].mean()/t6.E_wb_mm.mean()-1):+.1f}%)', zorder=5)
     a.set_ylim(0, 1020)
     a.set_xticks(yrs)
-    a.set_ylabel('Annual flux (mm a⁻¹)')
+    a.set_ylabel('Annual flux (mm a$^{-1}$)')
     a.legend(loc='upper left', fontsize=6.8, ncol=2, **LEG)
-    panel_title(a, 'a', f'Water-balance closure benchmark (mean E_wb = {t6.E_wb_mm.mean():.1f} mm a⁻¹)')
+    panel_title(a, 'a', f'Water-balance closure benchmark (mean E_wb = {t6.E_wb_mm.mean():.1f} mm a$^{-1}$)')
 
     # (b) Non-steady-state Budyko with shaded envelope, ±1σ error bars & complete legend
     clean_ax(b, 'both')
@@ -822,7 +828,7 @@ def fig6():
     d.set_ylim(0.18, 0.44)
     d.set_ylabel('Catchment runoff ratio (R / P)')
     d.text(0.97, 0.94,
-           f'Δ(R/P) = {dec.Total_dRP:+.3f} ({dec.Volumetric_Runoff_Drop_km3_yr:+.2f} km³ a⁻¹)\n'
+           f'Δ(R/P) = {dec.Total_dRP:+.3f} ({dec.Volumetric_Runoff_Drop_km3_yr:+.2f} km³ a$^{-1}$)\n'
            f'ω_WB: {dec.wWB_Peak:.3f} (±{w_pk_sd:.2f}) → {dec.wWB_Drawdown:.3f} (±{w_dd_sd:.2f})',
            transform=d.transAxes, ha='right', va='top', fontsize=7.5, fontweight='bold',
            bbox=dict(boxstyle='round,pad=0.3', fc='#F7FAFC', ec='#CBD5E0'))
@@ -883,7 +889,7 @@ def fig7():
     b.set_xticks(x_pos)
     b.set_xticklabels(labs, fontsize=7.0, fontweight='bold')
     b.set_xlim(-0.65, 4.55)
-    b.set_ylabel('NDVI trend 2004–2024 (decade⁻¹)')
+    b.set_ylabel('NDVI trend 2004–2024 (decade$^{-1}$)')
     b.set_ylim(0, 0.0275)
     b.legend(handles=[
         mpatches.Patch(color='#EDF2F7', ec='#1A202C', label='Observed trend (unexplained top)'),
@@ -913,13 +919,13 @@ def ga():
 
     # Header Banner
     ax.add_patch(FancyBboxPatch((0.2, 5.52), 12.2, 0.80, boxstyle='round,pad=0.04,rounding_size=0.14', fc=NAVY, ec='none'))
-    ax.text(6.3, 6.03, 'Reliability Audit of Alpine Water-Storage & Cryosphere–Vegetation Inferences',
-            ha='center', va='center', color='white', fontsize=13.5, fontweight='bold')
+    ax.text(6.3, 6.03, 'Separating Physical Hydrology from Multi-Sensor Artifacts in Alpine Headwaters',
+            ha='center', va='center', color='white', fontsize=12.6, fontweight='bold')
     ax.text(6.3, 5.71, 'Source Region of the Yellow River  ·  Tangnaihai catchment (123,800 km²)  ·  2003–2024',
             ha='center', va='center', color='#BEE3F8', fontsize=9.6)
 
     cards = [
-        (0.25, '#FFF5F5', CRIMSON, '01', 'Claims Overturned by Audit', [
+        (0.25, '#FFF5F5', CRIMSON, '01', 'Multi-Sensor Artifacts Resolved', [
             f'k = 12 mo NDVI–TWSA suppression: p {r12.p_iid:.3f} → {r12.p_eff_PP:.3f} (N_eff = {r12.N_eff_PP:.0f})',
             f'Post-peak SNR drops {ph.iloc[2].SNR_iid:.1f} → {ph.iloc[2].SNR_corr_FObias:.1f} with AR(1) + FO bias',
             'Budyko-ω "greening shift": disappears using E_wb & P − ΔS',
@@ -927,19 +933,19 @@ def ga():
             'Positive NDVI–ET coupling: restricted to LAI-driven PML',
             'Elevation warming gradient: ERA5 +0.29 vs. TerraClimate −0.02 °C/dec',
         ]),
-        (4.38, '#F0FFF4', TEAL, '02', 'Robust Findings That Hold', [
+        (4.38, '#F0FFF4', TEAL, '02', 'Robust Physical Mechanisms', [
             f'2021–2024 TWSA remains +{ph.iloc[2].Diff_vs_Pre_JPL_cm:.2f} cm above 2003–2017',
             f'Runoff elasticity {el.obs_elasticity:.2f} matches fixed-ω Budyko ({el.budyko_elasticity_wfix:.2f})',
-            f'P −15.7% drives R −31.9% ({dec.Volumetric_Runoff_Drop_km3_yr:+.1f} km³ a⁻¹); ω_WB invariant',
+            f'P −15.7% drives R −31.9% ({dec.Volumetric_Runoff_Drop_km3_yr:+.1f} km³/yr); ω_WB invariant',
             '12–24 mo P gives 80.4% RF (63.8% XGB) SHAP skill',
             'Closure (423.5 mm) brackets TC/PML; falsifies MOD16 (+43%)',
             'Basin air temperature warms consistently ≈ +1.0 °C/dec',
         ]),
-        (8.51, '#FFFAF0', ORANGE, '03', 'Open Permafrost Lead', [
-            f'Permafrost side (ST4 < 0 °C): NDVI +{pf.NDVI_trend_dec:.4f}/dec',
-            f'{pf.Unexpl_pct:.0f}% [{pf.Unexpl_lo:.0f}, {pf.Unexpl_hi:.0f}]% unexplained by interannual T & P',
-            'Holds with ERA5 soil moisture, snow & IGBP grassland mask',
-            'Priority in-situ tests: active-layer thaw, grazing & restoration',
+        (8.51, '#FFFAF0', ORANGE, '03', 'Permafrost Greening Excess', [
+            f'Permafrost zone (ST4 < 0 °C): NDVI +{pf.NDVI_trend_dec:.4f}/dec',
+            f'{pf.Unexpl_pct:.0f}% [{pf.Unexpl_lo:.0f}, {pf.Unexpl_hi:.0f}]% exceeds interannual T & P trends',
+            'Persists across elevation, baseline-NDVI & MODIS-snow controls',
+            r'Linked to active-layer thaw, restoration & CO$_2$',
         ]),
     ]
 
@@ -964,7 +970,7 @@ def ga():
     ax.add_patch(mpatches.Rectangle((8.88, 0.72), 3.10 * 0.476, 0.32, fc=SKY, ec='#1A202C', lw=0.6))
     ax.add_patch(mpatches.Rectangle((8.88 + 3.10 * 0.476, 0.72), 3.10 * 0.524, 0.32, fc=ORANGE, ec='#1A202C', lw=0.6, alpha=0.85))
     ax.text(8.88 + 3.10 * 0.238, 0.88, '48% T+P', ha='center', va='center', fontsize=6.9, fontweight='bold', color='#1A202C')
-    ax.text(8.88 + 3.10 * 0.738, 0.88, '52% Open Lead', ha='center', va='center', fontsize=6.9, fontweight='bold', color='white')
+    ax.text(8.88 + 3.10 * 0.738, 0.88, '52% Excess', ha='center', va='center', fontsize=6.9, fontweight='bold', color='white')
 
     save(fig, 'Graphical_Abstract.png')
 
