@@ -1,7 +1,7 @@
-# SRYR Hydrological Reliability Audit (2003–2024)
+# Separating Physical Hydrology from Multi-Sensor Artifacts in the SRYR (2003–2024)
 
 Reproducibility code and derived diagnostic tables for:
-**"Reliability Audit of Satellite- and Reanalysis-Based Hydrological Inferences in a Permafrost-Underlain Alpine Headwater (Source Region of the Yellow River, 2003–2024)"**
+**"Separating Physical Hydrology from Multi-Sensor Artifacts in a Permafrost-Underlain Alpine Headwater (Source Region of the Yellow River, 2003–2024)"**
 
 ## Repository Structure
 
