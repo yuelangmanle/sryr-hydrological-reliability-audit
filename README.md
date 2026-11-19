@@ -11,7 +11,7 @@ Reproducibility code and derived diagnostic tables for:
   - `41_greening_residual_probe.py` — Climate-explained vs. unexplained permafrost greening residual with moving-block bootstrap confidence intervals and IGBP grassland/savanna mask checks.
   - `42_jms_round2_supplements.py` — Within-elevation-stratum (`3,800–4,300 m`, `≥4,300 m`) and baseline-NDVI-matched permafrost controls, `ST4` thermal threshold sensitivity (`−0.5, 0.0, +0.5 °C`), `TerraClimate` + `MODIS` snow cross-sensor checks, Ridge collinearity diagnostics, 2,000-draw joint Budyko Monte Carlo uncertainty propagation, orthogonal precipitation lag-band TreeSHAP (`RF` & `XGBoost`), and GRACE `AR(1)` `ρ` sensitivity sweeps.
 - `code/02_figures/`
-  - `45_jms_figures_publication.py` — Generates all seven 600-DPI manuscript figures (`Fig1`–`Fig7`) and `Graphical_Abstract.png` directly from `results_repaired/`.
+  - `45_jms_figures_publication.py` — Generates all seven 450–600 DPI publication-grade manuscript figures (`Fig1`–`Fig7`) and `Graphical_Abstract.png` directly from `results_repaired/`.
 - `results_repaired/` — All derived basin, zonal, pixel-panel, Budyko, walk-forward, SHAP, and Monte Carlo diagnostic tables (`.csv`, `.npz`) used in Tables 1–6 and Figures 1–7.
 - `data/boundary/yr_source_boundary.geojson` — Source Region of the Yellow River catchment polygon above Tangnaihai gauge.
 
